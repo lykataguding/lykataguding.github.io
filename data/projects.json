@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Log in System",
+    "description": "A simple application for log in. (Replace with your own description.)",
+    "technologies": ["html", "css"],
+    "role": "Developer and designer",
+    "screenshot": "images/project1.jpg",
+    "link": "https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPOSITORY-1"
+  },
+  {
+    "title": "Personal Website",
+    "description": "A website built with plain HTML and CSS. (Replace with your own description.)",
+    "technologies": ["HTML", "CSS"],
+    "role": "Designer and developer",
+    "screenshot": "images/project2.jpg",
+    "link": "https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPOSITORY-2"
+  }
+]
