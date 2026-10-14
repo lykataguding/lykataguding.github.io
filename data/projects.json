@@ -1,18 +1,18 @@
 [
   {
     "title": "Log in System",
-    "description": "A simple application for log in. (Replace with your own description.)",
+    "description": "My login system is a simple and user-friendly website that allows users to enter their username and password to access to their accounts.",
     "technologies": ["html", "css"],
     "role": "Developer and designer",
     "screenshot": "images/project1.jpg",
-    "link": "https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPOSITORY-1"
+    "link": "https://github.com/lykataguding/YOUR-REPOSITORY-1"
   },
   {
     "title": "Personal Website",
-    "description": "A website built with plain HTML and CSS. (Replace with your own description.)",
+    "description": "My personal website is all about me, my skills, and the special moments I share with my family and friends. It shows a little part of who I am and the people who are important to me.",
     "technologies": ["HTML", "CSS"],
     "role": "Designer and developer",
     "screenshot": "images/project2.jpg",
-    "link": "https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPOSITORY-2"
+    "link": "https://github.com/lykataguding/YOUR-REPOSITORY-2"
   }
 ]
