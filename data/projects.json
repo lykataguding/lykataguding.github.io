@@ -2,7 +2,7 @@
   {
     "title": "Log in System",
     "description": "My login system is a simple and user-friendly website that allows users to enter their username and password to access to their accounts.",
-    "technologies": ["html", "css"],
+    "technologies": ["HTML", "CSS"],
     "role": "Developer and designer",
     "screenshot": "images/project1.jpg",
     "link": "https://github.com/lykataguding/YOUR-REPOSITORY-1"
