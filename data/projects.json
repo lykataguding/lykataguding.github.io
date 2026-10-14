@@ -1,18 +1,31 @@
 [
   {
+<<<<<<< HEAD
     "title": "Login System",
     "description": "My login system is a simple and user-friendly website that allows users to enter their username and password to access to their accounts.",
     "technologies": ["HTML", "CSS"],
     "role": "Developer and designer",
     "screenshot": "images/project1.jpeg",
     "link": "https://github.com/lykataguding/taguding.github.io"
+=======
+    "title": "Log in System",
+    "description": "My login system is a simple and user-friendly website that allows users to enter their username and password to access to their accounts.",
+    "technologies": ["HTML", "CSS"],
+    "role": "Developer and designer",
+    "screenshot": "project1.jpeg",
+    "link": "https://github.com/lykataguding/lykataguding.github.io"
+>>>>>>> 3a3a52cfaec44efae04525874500923d08c076dc
   },
   {
     "title": "Personal Website",
     "description": "My personal website is all about me, my skills, and the special moments I share with my family and friends. It shows a little part of who I am and the people who are important to me.",
     "technologies": ["HTML", "CSS"],
     "role": "Designer and developer",
+<<<<<<< HEAD
     "screenshot": "images/project2.png",
+=======
+    "screenshot": "project2.png",
+>>>>>>> 3a3a52cfaec44efae04525874500923d08c076dc
     "link": "https://github.com/lykataguding/lykataguding.github.io"
   }
 ]
