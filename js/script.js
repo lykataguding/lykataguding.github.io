@@ -1,56 +1,79 @@
+
 /* =========================================================
    Student Portfolio - script.js
-   1. Mobile menu   2. Projects from JSON   3. GitHub API
-   4. Contact form validation   5. Back to top button
+   1. Mobile menu
+   2. Projects from JSON
+   3. GitHub API
+   4. Contact form validation
+   5. Back to top button
    ========================================================= */
 
-// >>> CHANGE THIS to your real GitHub username <<<
+// GitHub username
 const GITHUB_USERNAME = "lykataguding";
 
 
 /* ---------- 1. Mobile menu ---------- */
+
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 
-navToggle.addEventListener("click", function () {
-  const isOpen = navMenu.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", isOpen);
-  navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-});
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", function () {
+    const isOpen = navMenu.classList.toggle("open");
 
-// Close the menu after tapping a link
-navMenu.querySelectorAll("a").forEach(function (link) {
-  link.addEventListener("click", function () {
-    navMenu.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.setAttribute("aria-label", "Open menu");
+    navToggle.setAttribute("aria-expanded", isOpen);
+    navToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close menu" : "Open menu"
+    );
   });
-});
+
+  navMenu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navMenu.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    });
+  });
+}
 
 
-/* ---------- 2. Load projects from data/projects.json ---------- */
+/* ---------- 2. Load projects from JSON ---------- */
+
 const projectsGrid = document.getElementById("projectsGrid");
 
 async function loadProjects() {
+  if (!projectsGrid) {
+    console.error("Projects section not found. Check the projectsGrid ID.");
+    return;
+  }
+
   try {
     const response = await fetch("data/projects.json");
+
     if (!response.ok) {
       throw new Error("HTTP status " + response.status);
     }
-    const projects = await response.json();   // parse the JSON
 
-    projectsGrid.innerHTML = "";               // remove "Loading..." text
+    const projects = await response.json();
+
+    projectsGrid.innerHTML = "";
+
     projects.forEach(function (project) {
       projectsGrid.appendChild(createProjectCard(project));
     });
+
   } catch (error) {
-    console.warn("Projects could not be loaded:", error.message);
+    console.error("Projects could not be loaded:", error);
+
     projectsGrid.innerHTML =
       '<p class="status-message error">Unable to load projects. Please try again later.</p>';
   }
 }
 
-// Build one project card (textContent is used so data is never run as HTML)
+
+// Create project cards
+
 function createProjectCard(project) {
   const card = document.createElement("article");
   card.className = "card project-card";
@@ -71,7 +94,8 @@ function createProjectCard(project) {
 
   const badges = document.createElement("ul");
   badges.className = "badges";
-  project.technologies.forEach(function (tech) {
+
+  (project.technologies || []).forEach(function (tech) {
     const li = document.createElement("li");
     li.textContent = tech;
     badges.appendChild(li);
@@ -85,43 +109,64 @@ function createProjectCard(project) {
   link.className = "btn btn-outline";
   link.href = project.link;
   link.target = "_blank";
-  link.rel = "noopener";
-  link.textContent = "View project";
+  link.rel = "noopener noreferrer";
+  link.textContent = project.liveLink
+    ? "View Source Code"
+    : "View Project";
 
   body.append(title, description, badges, role, link);
+
+  if (project.liveLink) {
+    const liveLink = document.createElement("a");
+    liveLink.className = "btn btn-primary";
+    liveLink.href = project.liveLink;
+    liveLink.target = "_blank";
+    liveLink.rel = "noopener noreferrer";
+    liveLink.textContent = "View Live Project";
+
+    body.appendChild(liveLink);
+  }
+
   card.append(img, body);
+
   return card;
 }
 
 
-/* ---------- 3. Latest GitHub repositories (REST API) ---------- */
+
+
+/* ---------- 3. GitHub repositories ---------- */
+
 const repoList = document.getElementById("repoList");
 
 async function loadRepos() {
-  const unavailable =
-    '<li class="status-message error">GitHub repositories are currently unavailable. Please try again later.</li>';
-
-  // Skip the request until a real username is set (avoids a 404 error)
-  if (GITHUB_USERNAME === "YOUR-GITHUB-USERNAME") {
-    repoList.innerHTML =
-      '<li class="status-message">Set your GitHub username in js/script.js to show your latest repositories.</li>';
+  if (!repoList) {
+    console.error("GitHub repository section not found. Check the repoList ID.");
     return;
   }
 
   try {
-    const url = "https://api.github.com/users/" + GITHUB_USERNAME + "/repos?sort=updated&per_page=5";
+    const url =
+      "https://api.github.com/users/" +
+      GITHUB_USERNAME +
+      "/repos?sort=updated&per_page=10";
+
     const response = await fetch(url);
+
     if (!response.ok) {
       throw new Error("HTTP status " + response.status);
     }
+
     const repos = await response.json();
 
+    repoList.innerHTML = "";
+
     if (repos.length === 0) {
-      repoList.innerHTML = '<li class="status-message">No public repositories yet.</li>';
+      repoList.innerHTML =
+        '<li class="status-message">No public repositories found.</li>';
       return;
     }
 
-    repoList.innerHTML = "";
     repos.forEach(function (repo) {
       const item = document.createElement("li");
       item.className = "repo-item";
@@ -134,87 +179,127 @@ async function loadRepos() {
 
       const language = document.createElement("span");
       language.className = "repo-lang";
-      language.textContent = repo.language || "Language not specified";
+      language.textContent =
+        repo.language || "Language not specified";
 
       item.append(link, language);
       repoList.appendChild(item);
     });
+
   } catch (error) {
-    console.warn("GitHub data could not be loaded:", error.message);
-    repoList.innerHTML = unavailable;
+    console.error("GitHub repositories could not be loaded:", error);
+
+    repoList.innerHTML =
+      '<li class="status-message error">GitHub repositories are currently unavailable. Please try again later.</li>';
   }
 }
 
 
 /* ---------- 4. Contact form validation ---------- */
+
 const form = document.getElementById("contactForm");
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("message");
 const formSuccess = document.getElementById("formSuccess");
 
-// Simple email pattern: text@text.text
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function showError(input, errorId, message) {
-  document.getElementById(errorId).textContent = message;
-  input.classList.toggle("invalid", message !== "");
-  input.setAttribute("aria-invalid", message !== "");
+  const errorElement = document.getElementById(errorId);
+
+  if (errorElement && input) {
+    errorElement.textContent = message;
+    input.classList.toggle("invalid", message !== "");
+    input.setAttribute("aria-invalid", message !== "");
+  }
 }
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault();                 // never submit to a server
-  formSuccess.textContent = "";
+if (
+  form &&
+  nameInput &&
+  emailInput &&
+  messageInput &&
+  formSuccess
+) {
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  let valid = true;
+    formSuccess.textContent = "";
 
-  if (nameInput.value.trim() === "") {
-    showError(nameInput, "nameError", "Please enter your name.");
-    valid = false;
-  } else {
-    showError(nameInput, "nameError", "");
-  }
+    let valid = true;
 
-  if (emailInput.value.trim() === "") {
-    showError(emailInput, "emailError", "Please enter your email address.");
-    valid = false;
-  } else if (!emailPattern.test(emailInput.value.trim())) {
-    showError(emailInput, "emailError", "Please enter a valid email address, like name@example.com.");
-    valid = false;
-  } else {
-    showError(emailInput, "emailError", "");
-  }
+    if (nameInput.value.trim() === "") {
+      showError(nameInput, "nameError", "Please enter your name.");
+      valid = false;
+    } else {
+      showError(nameInput, "nameError", "");
+    }
 
-  if (messageInput.value.trim() === "") {
-    showError(messageInput, "messageError", "Please enter a message.");
-    valid = false;
-  } else {
-    showError(messageInput, "messageError", "");
-  }
+    if (emailInput.value.trim() === "") {
+      showError(
+        emailInput,
+        "emailError",
+        "Please enter your email address."
+      );
+      valid = false;
+    } else if (!emailPattern.test(emailInput.value.trim())) {
+      showError(
+        emailInput,
+        "emailError",
+        "Please enter a valid email address."
+      );
+      valid = false;
+    } else {
+      showError(emailInput, "emailError", "");
+    }
 
-  if (!valid) {
-    return;                               // stop here if something is wrong
-  }
+    if (messageInput.value.trim() === "") {
+      showError(
+        messageInput,
+        "messageError",
+        "Please enter a message."
+      );
+      valid = false;
+    } else {
+      showError(messageInput, "messageError", "");
+    }
 
-  // Static site: the message is NOT really sent, we only simulate success
-  formSuccess.textContent = "Thank you! Your message has been received.";
-  form.reset();
-});
+    if (!valid) {
+      return;
+    }
+
+    formSuccess.textContent =
+      "Thank you! Your message has been received.";
+
+    form.reset();
+  });
+}
 
 
-/* ---------- 5. Back to top button (personal feature) ---------- */
+/* ---------- 5. Back to top button ---------- */
+
 const backToTop = document.getElementById("backToTop");
 
-window.addEventListener("scroll", function () {
-  // Show after scrolling 300px, hide near the top
-  backToTop.classList.toggle("visible", window.scrollY > 300);
-});
+if (backToTop) {
+  window.addEventListener("scroll", function () {
+    backToTop.classList.toggle(
+      "visible",
+      window.scrollY > 300
+    );
+  });
 
-backToTop.addEventListener("click", function () {
-  document.getElementById("home").scrollIntoView({ behavior: "smooth" });
-});
+  backToTop.addEventListener("click", function () {
+    const home = document.getElementById("home");
+
+    if (home) {
+      home.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
 
 
-/* ---------- Start ---------- */
+/* ---------- Start all functions ---------- */
+
 loadProjects();
 loadRepos();

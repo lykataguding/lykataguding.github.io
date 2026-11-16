@@ -14,5 +14,14 @@
     "role": "Designer and developer",
     "screenshot": "images/project2.png",
     "link": "https://lykataguding.github.io/personal-website/"
+  },
+  {
+    "title": "AttendEase - Attendance Management System",
+    "description": "AttendEase is a web-based attendance management system that helps teachers manage classes, monitor students, and record attendance online.",
+    "technologies": ["HTML", "CSS", "JavaScript", "Firebase"],
+    "role": "Developer",
+    "screenshot": "images/project3.png",
+    "link": "https://github.com/lykataguding/AttendEase",
+    "liveLink": "https://attendease-b2c7a.web.app"
   }
 ]

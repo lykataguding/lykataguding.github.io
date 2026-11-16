@@ -14,8 +14,8 @@
   --muted: #7A6358;
   --border: #F0D9CB;
 
-  --font-heading: "Style Script", cursive;
-  --font-body:  "Style Script", cursive;
+  --font-heading: "Courier, monospace";
+  --font-body:  "Courier, monospace";
 
   --radius: 16px;
   --shadow: 0 2px 8px rgba(143, 58, 24, 0.12);
