@@ -74,6 +74,7 @@ async function loadProjects() {
 
 // Create project cards
 
+
 function createProjectCard(project) {
   const card = document.createElement("article");
   card.className = "card project-card";
@@ -127,10 +128,21 @@ function createProjectCard(project) {
     body.appendChild(liveLink);
   }
 
+  if (project.apkLink) {
+    const apkLink = document.createElement("a");
+    apkLink.className = "btn btn-primary";
+    apkLink.href = project.apkLink;
+    apkLink.textContent = "Download Android App";
+    apkLink.setAttribute("download", "AttendEase.apk");
+
+    body.appendChild(apkLink);
+  }
+
   card.append(img, body);
 
   return card;
 }
+
 
 
 
