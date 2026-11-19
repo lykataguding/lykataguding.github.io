@@ -21,7 +21,8 @@
     "technologies": ["HTML", "CSS", "JavaScript", "Firebase"],
     "role": "Developer",
     "screenshot": "images/project3.png",
-    "link": "https://github.com/lykataguding/AttendEase",
-    "liveLink": "https://attendease-b2c7a.web.app"
+   "link": "https://github.com/lykataguding/AttendEase",
+"liveLink": "https://attendease-b2c7a.web.app",
+"apkLink": "https://github.com/lykataguding/AttendEase/raw/refs/heads/main/apk/app-debug.apk"
   }
 ]
