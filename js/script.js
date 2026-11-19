@@ -49,7 +49,7 @@ async function loadProjects() {
   }
 
   try {
-    const response = await fetch("data/projects.json");
+    const response = await fetch("data/projects.js");
 
     if (!response.ok) {
       throw new Error("HTTP status " + response.status);
