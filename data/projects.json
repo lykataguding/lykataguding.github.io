@@ -1,3 +1,4 @@
+
 [
   {
     "title": "Login System",
@@ -17,12 +18,12 @@
   },
   {
     "title": "AttendEase - Attendance Management System",
-    "description": "AttendEase is a web-based attendance management system that helps teachers manage classes, monitor students, and record attendance online.",
-    "technologies": ["HTML", "CSS", "JavaScript", "Firebase"],
+    "description": "AttendEase is an attendance management application that helps teachers manage classes, monitor students, and record attendance. It is available as a web and Android application.",
+    "technologies": ["HTML", "CSS", "JavaScript", "Firebase", "Capacitor"],
     "role": "Developer",
     "screenshot": "images/project3.png",
-   "link": "https://github.com/lykataguding/AttendEase",
-"liveLink": "https://attendease-b2c7a.web.app",
-"apkLink": "https://github.com/lykataguding/AttendEase/raw/refs/heads/main/apk/app-debug.apk"
+    "link": "https://github.com/lykataguding/AttendEase",
+    "liveLink": "https://attendease-b2c7a.web.app",
+    "apkLink": "https://github.com/lykataguding/AttendEase/raw/refs/heads/main/apk/app-debug.apk"
   }
 ]

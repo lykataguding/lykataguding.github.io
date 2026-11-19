@@ -143,10 +143,6 @@ function createProjectCard(project) {
   return card;
 }
 
-
-
-
-
 /* ---------- 3. GitHub repositories ---------- */
 
 const repoList = document.getElementById("repoList");
